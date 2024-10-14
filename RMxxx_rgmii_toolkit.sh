@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Define toolkit paths
-GITUSER="iamromulan"
+GITUSER="hjyy0410"
 GITTREE="main"
 TMP_DIR="/tmp"
 USRDATA_DIR="/usrdata"
