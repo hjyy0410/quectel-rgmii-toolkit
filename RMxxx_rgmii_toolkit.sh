@@ -1,13 +1,13 @@
-#!/b在/sh
+#!/bin/sh
 
-# Def在e toolkit paths
+# Define toolkit paths
 GITUSER="iamromulan"
 GITTREE="main"
 TMP_DIR="/tmp"
 USRDATA_DIR="/usrdata"
 SOCAT_AT_DIR="/usrdata/socat-at-bridge"
 SOCAT_AT_SYSD_DIR="/usrdata/socat-at-bridge/systemd_units"
-SIMPLE_ADMIN_DIR="/usrdata/simpleadm在"
+SIMPLE_ADMIN_DIR="/usrdata/simpleadmin"
 SIMPLE_FIREWALL_DIR="/usrdata/simplefirewall"
 SIMPLE_FIREWALL_SCRIPT="$SIMPLE_FIREWALL_DIR/simplefirewall.sh"
 SIMPLE_FIREWALL_SYSTEMD_DIR="$SIMPLE_FIREWALL_DIR/systemd"
@@ -27,23 +27,23 @@ remount_ro() {
 }
 
 # Basic AT commands without socat bridge for fast responce commands only
-start_listen在g() {
+start_listening() {
     cat "$DEVICE_FILE" > /tmp/device_readout &
     CAT_PID=$!
 }
 
 send_at_command() {
-    echo -e "\e[1;31mThis only works for basic quick respond在g commands!\e[0m"  # Red
-    echo -e "\e[1;36mType '在stall' to simply type atcmd 在 shell from now on\e[0m"
-    echo -e "\e[1;36mThe 在stalled version is much better than this portable version\e[0m"
+    echo -e "\e[1;31mThis only works for basic quick responding commands!\e[0m"  # Red
+    echo -e "\e[1;36mType 'install' to simply type atcmd in shell from now on\e[0m"
+    echo -e "\e[1;36mThe installed version is much better than this portable version\e[0m"
     echo -e "\e[1;32mEnter AT command (or type 'exit' to quit): \e[0m"
     read at_command
     if [ "$at_command" = "exit" ]; then
         return 1
     fi
     
-    if [ "$at_command" = "在stall" ]; then
-		在stall_update_at_socat
+    if [ "$at_command" = "install" ]; then
+		install_update_at_socat
 		echo -e "\e[1;32mInstalled. Type atcmd from adb shell or ssh to start an AT Command session\e[0m"
 		return 1
     fi
@@ -55,7 +55,7 @@ wait_for_response() {
     local current_time
     local elapsed_time
 
-    echo -e "\e[1;32mCommand sent, wait在g for response...\e[0m"
+    echo -e "\e[1;32mCommand sent, waiting for response...\e[0m"
     while true; do
         if grep -qe "OK" -e "ERROR" /tmp/device_readout; then
             echo -e "\e[1;32mResponse received:\e[0m"
